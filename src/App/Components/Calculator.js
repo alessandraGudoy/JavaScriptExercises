@@ -1,58 +1,156 @@
 import React from "react";
-import Number from './Number.js';
-import SpecialButton from './SpecialButton.js';
+import Button from './Button.js';
+import Input from "./Input.js";
 
 class Calculator extends React.Component{
     constructor(props){
         super(props);
-        this.makeDisplay = this.makeDisplay.bind(this);
+
+        this.clickNumber = this.clickNumber.bind(this);
+        this.getOperation = this.getOperation.bind(this);
+        this.equalSign = this.equalSign.bind(this);
+        this.clear = this.clear.bind(this);
+
         this.state = {
-            display: "",
-            num: "",
-            op: "",
-            ans: 0
-        };
+            display: 0,
+            num1: "",
+            num2: "",
+            operation: "",
+            ans: "",
+            gotOp: false
+        }
     }
 
-    makeDisplay(num){
-        let current = this.state.display;
+    // make a button with value i (numbers)
+    makeButton(i){
+        return (<Button value={i} function={this.clickNumber}/>);
+    }
+
+    clickNumber(param){
+        let current1 = (this.state.num1).toString();
+        let current2 = (this.state.num2).toString();
+        param = param.toString();
+
+
+        if(this.state.gotOp === false){
+            this.setState({
+                display: current1+param,
+                num1: current1+param
+            });
+        } else if(this.state.gotOp === true){
+            this.setState({
+                display: current2+param,
+                num2: current2+param
+            });
+        }
+        console.log("number " + this.state);
+    }
+
+    operationButton(i){
+        return (<Button value={i} function={this.getOperation}/>);
+    }
+
+    getOperation(param){
         this.setState({
-            display: current+num
+            operation: param,
+            gotOp: true
         });
-        console.log(current+num);
+        console.log("op: " + this.state)
     }
 
-    splitDisp(){
-        //this.setState
+    equalSign(param){
+        let num1 = this.state.num1;
+        let num2 = this.state.num2;
+        let op = this.state.operation;
+
+        if(op === "+"){
+            this.setState({
+                display: parseInt(num1) + parseInt(num2),
+                num1: parseInt(num1) + parseInt(num2),
+                num2: "",
+                operation: "",
+                ans: parseInt(num1) + parseInt(num2),
+                gotOp: false
+            });
+        } else if(op === "-"){
+            this.setState({
+                display: parseInt(num1) - parseInt(num2),
+                num1: parseInt(num1) - parseInt(num2),
+                num2: "",
+                operation: "",
+                ans: parseInt(num1) - parseInt(num2),
+                gotOp: false
+            });
+        } else if(op === "x"){
+            this.setState({
+                display: parseInt(num1) * parseInt(num2),
+                num1: parseInt(num1) * parseInt(num2),
+                num2: "",
+                operation: "",
+                ans: parseInt(num1) * parseInt(num2),
+                gotOp: false
+            });
+        } else if(op === "÷"){
+            this.setState({
+                display: parseInt(num1) / parseInt(num2),
+                num1: parseInt(num1) / parseInt(num2),
+                num2: "",
+                operation: "",
+                ans: parseInt(num1) / parseInt(num2),
+                gotOp: false
+            });
+        } else{
+            this.setState({
+                display: num1,
+                num1: num1,
+                num2: "",
+                operation: "",
+                ans: "",
+                gotOp: false
+            });
+        };
+        console.log("= " + this.state);
+    }
+
+    clear(){
+        this.setState({
+            display: 0,
+            num1: "",
+            num2: "",
+            operation: "",
+            ans: "",
+            gotOp: false
+        });
     }
 
     render(){
         return (
             <div>
-                <div>
-                    <Number value={7} display={this.makeDisplay} />
-                    <Number value={8} display={this.makeDisplay}/>
-                    <Number value={9} display={this.makeDisplay}/>
-                    <SpecialButton op={"+"} value={","} display={this.makeDisplay}/>
-                </div>
-                <div>
-                    <Number value={4} display={this.makeDisplay}/>
-                    <Number value={5} display={this.makeDisplay}/>
-                    <Number value={6} display={this.makeDisplay}/>
-                    <SpecialButton op={"–"} value={","} display={this.makeDisplay}/>
-                </div>
-                <div>
-                    <Number value={1} display={this.makeDisplay}/>
-                    <Number value={2} display={this.makeDisplay}/>
-                    <Number value={3} display={this.makeDisplay}/>
-                    <SpecialButton op={"x"} value={","} display={this.makeDisplay}/>
-                </div>
-                <div>
-                    <SpecialButton op={"C"} />
-                    <Number value={0} display={this.makeDisplay}/>
-                    <SpecialButton op={"="} />
-                    <SpecialButton op={"÷"} value={","} display={this.makeDisplay}/>
-                </div>
+                <Input value={this.state.display}/>
+               <div>
+                   {this.makeButton(7)}
+                   {this.makeButton(8)}
+                   {this.makeButton(9)}
+                   {this.operationButton("÷")}
+               </div>
+               <div>
+                   {this.makeButton(4)}
+                   {this.makeButton(5)}
+                   {this.makeButton(6)}
+                   {this.operationButton("x")}
+               </div>
+               <div>
+                   {this.makeButton(1)}
+                   {this.makeButton(2)}
+                   {this.makeButton(3)}
+                   {this.operationButton("-")}
+               </div>
+               <div>
+                   <Button value="C" function={this.clear}/>
+                   {this.makeButton(0)}
+                   <Button value="=" function={this.equalSign}/>
+                   {this.operationButton("+")}
+               </div>
             </div>
         );
     }

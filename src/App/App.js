@@ -13,8 +13,6 @@ class App extends React.Component{
     return (
       <div>
         <h1> Calculator </h1>
-        <Input />
-        <br/> <br/>
         <Calculator />
       </div>
     );

@@ -1,17 +1,13 @@
 import React from "react";
 
-class Number extends React.Component{
+class Button extends React.Component{
     constructor(props){
         super(props);
         this.onClick = this.onClick.bind(this);
-        this.state = {
-            value: ""
-        }
     }
 
     onClick(){
-        this.setState({value: this.props.value});
-        this.props.display(this.props.value);
+        this.props.function(this.props.value);
     }
 
     render(){
@@ -20,4 +16,4 @@ class Number extends React.Component{
 
 }
 
-export default Number;
+export default Button;
