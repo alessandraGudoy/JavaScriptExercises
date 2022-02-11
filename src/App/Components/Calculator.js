@@ -43,7 +43,7 @@ class Calculator extends React.Component{
                 num2: current2+param
             });
         }
-        console.log("number " + this.state);
+        console.log(this.state);
     }
 
     operationButton(i){
@@ -55,7 +55,7 @@ class Calculator extends React.Component{
             operation: param,
             gotOp: true
         });
-        console.log("op: " + this.state)
+        console.log(this.state)
     }
 
     equalSign(param){
@@ -109,7 +109,7 @@ class Calculator extends React.Component{
                 gotOp: false
             });
         };
-        console.log("= " + this.state);
+        console.log(this.state);
     }
 
     clear(){
