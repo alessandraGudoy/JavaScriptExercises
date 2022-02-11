@@ -58,7 +58,7 @@ class Calculator extends React.Component{
         console.log(this.state)
     }
 
-    equalSign(){
+    equalSign(param){
         let num1 = parseInt(this.state.num1);
         let num2 = parseInt(this.state.num2);
         let op = this.state.operation;
@@ -67,13 +67,17 @@ class Calculator extends React.Component{
             this.setState({
                 display: num1 + num2,
                 num1: num1 + num2,
-                ans: num1 + num2,
+                num2: "",
+                operation: "",
+                ans:num1 + num2,
                 gotOp: false
             });
         } else if(op === "-"){
             this.setState({
                 display: num1 - num2,
                 num1: num1 - num2,
+                num2: "",
+                operation: "",
                 ans: num1 - num2,
                 gotOp: false
             });
@@ -81,6 +85,8 @@ class Calculator extends React.Component{
             this.setState({
                 display: num1 * num2,
                 num1: num1 * num2,
+                num2: "",
+                operation: "",
                 ans: num1 * num2,
                 gotOp: false
             });
@@ -88,13 +94,15 @@ class Calculator extends React.Component{
             this.setState({
                 display: num1 / num2,
                 num1: num1 / num2,
+                num2: "",
+                operation: "",
                 ans: num1 / num2,
                 gotOp: false
             });
         } else{
             this.setState({
-                display: "",
-                num1: "",
+                display: num1,
+                num1: num1,
                 num2: "",
                 operation: "",
                 ans: "",
