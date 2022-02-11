@@ -58,51 +58,43 @@ class Calculator extends React.Component{
         console.log(this.state)
     }
 
-    equalSign(param){
-        let num1 = this.state.num1;
-        let num2 = this.state.num2;
+    equalSign(){
+        let num1 = parseInt(this.state.num1);
+        let num2 = parseInt(this.state.num2);
         let op = this.state.operation;
 
         if(op === "+"){
             this.setState({
-                display: parseInt(num1) + parseInt(num2),
-                num1: parseInt(num1) + parseInt(num2),
-                num2: "",
-                operation: "",
-                ans: parseInt(num1) + parseInt(num2),
+                display: num1 + num2,
+                num1: num1 + num2,
+                ans: num1 + num2,
                 gotOp: false
             });
         } else if(op === "-"){
             this.setState({
-                display: parseInt(num1) - parseInt(num2),
-                num1: parseInt(num1) - parseInt(num2),
-                num2: "",
-                operation: "",
-                ans: parseInt(num1) - parseInt(num2),
+                display: num1 - num2,
+                num1: num1 - num2,
+                ans: num1 - num2,
                 gotOp: false
             });
         } else if(op === "x"){
             this.setState({
-                display: parseInt(num1) * parseInt(num2),
-                num1: parseInt(num1) * parseInt(num2),
-                num2: "",
-                operation: "",
-                ans: parseInt(num1) * parseInt(num2),
+                display: num1 * num2,
+                num1: num1 * num2,
+                ans: num1 * num2,
                 gotOp: false
             });
         } else if(op === "÷"){
             this.setState({
-                display: parseInt(num1) / parseInt(num2),
-                num1: parseInt(num1) / parseInt(num2),
-                num2: "",
-                operation: "",
-                ans: parseInt(num1) / parseInt(num2),
+                display: num1 / num2,
+                num1: num1 / num2,
+                ans: num1 / num2,
                 gotOp: false
             });
         } else{
             this.setState({
-                display: num1,
-                num1: num1,
+                display: "",
+                num1: "",
                 num2: "",
                 operation: "",
                 ans: "",
