@@ -29,6 +29,7 @@ class Calculator extends React.Component{
     clickNumber(param){
         let current1 = (this.state.num1).toString();
         let current2 = (this.state.num2).toString();
+        let currentDisplay = this.state.display;
         param = param.toString();
 
 
@@ -39,7 +40,7 @@ class Calculator extends React.Component{
             });
         } else if(this.state.gotOp === true){
             this.setState({
-                display: current2+param,
+                display: currentDisplay+current2+param,
                 num2: current2+param
             });
         }
@@ -51,7 +52,10 @@ class Calculator extends React.Component{
     }
 
     getOperation(param){
+        let currentDisplay = this.state.display;
+
         this.setState({
+            display: currentDisplay + param,
             operation: param,
             gotOp: true
         });
