@@ -106,7 +106,7 @@ class Calculator extends React.Component{
         } else{
             this.setState({
                 display: num1,
-                num1: num1,
+                num1: "",
                 num2: "",
                 operation: "",
                 ans: "",
@@ -118,7 +118,7 @@ class Calculator extends React.Component{
 
     clear(){
         this.setState({
-            display: 0,
+            display: "",
             num1: "",
             num2: "",
             operation: "",
