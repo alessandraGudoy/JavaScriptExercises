@@ -1,6 +1,8 @@
 import React from "react";
 import Button from './Button.js';
 import Input from "./Input.js";
+import History from "./History.js";
+
 
 class Calculator extends React.Component{
     constructor(props){
@@ -17,7 +19,9 @@ class Calculator extends React.Component{
             num2: "",
             operation: "",
             ans: "",
-            gotOp: false
+            gotOp: false,
+            answers: ["", "", ""]
+
         }
     }
 
@@ -62,10 +66,11 @@ class Calculator extends React.Component{
         console.log(this.state)
     }
 
-    equalSign(param){
+    equalSign(){
         let num1 = parseInt(this.state.num1);
         let num2 = parseInt(this.state.num2);
         let op = this.state.operation;
+        let arrAnswers = this.state.answers;
 
         if(op === "+"){
             this.setState({
@@ -76,6 +81,7 @@ class Calculator extends React.Component{
                 ans:num1 + num2,
                 gotOp: false
             });
+            arrAnswers.push(num1+num2);
         } else if(op === "-"){
             this.setState({
                 display: num1 - num2,
@@ -85,8 +91,9 @@ class Calculator extends React.Component{
                 ans: num1 - num2,
                 gotOp: false
             });
+            arrAnswers.push(num1-num2);
         } else if(op === "x"){
-            this.setState({
+            this.setState({ 
                 display: num1 * num2,
                 num1: num1 * num2,
                 num2: "",
@@ -94,6 +101,7 @@ class Calculator extends React.Component{
                 ans: num1 * num2,
                 gotOp: false
             });
+            arrAnswers.push(num1*num2);
         } else if(op === "÷"){
             this.setState({
                 display: num1 / num2,
@@ -103,9 +111,10 @@ class Calculator extends React.Component{
                 ans: num1 / num2,
                 gotOp: false
             });
+            arrAnswers.push(num1/num2);
         } else{
             this.setState({
-                display: num1,
+                display: 0,
                 num1: "",
                 num2: "",
                 operation: "",
@@ -113,12 +122,15 @@ class Calculator extends React.Component{
                 gotOp: false
             });
         };
-        console.log(this.state);
+
+        arrAnswers.shift();
+        this.setState({answers: arrAnswers});
+        console.log(arrAnswers);
     }
 
     clear(){
         this.setState({
-            display: "",
+            display: 0,
             num1: "",
             num2: "",
             operation: "",
@@ -127,9 +139,15 @@ class Calculator extends React.Component{
         });
     }
 
+
     render(){
         return (
             <div>
+                <div>
+                    <History value={this.state.answers[0]}/>
+                    <History value={this.state.answers[1]}/>
+                    <History value={this.state.answers[2]}/>
+                </div>
                 <Input value={this.state.display}/>
                <div>
                    {this.makeButton(7)}

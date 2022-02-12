@@ -1,7 +1,7 @@
 import React from "react";
 
 function Input(props){
-    return (<h5> {props.value} </h5>);
+    return (<h3> {props.value} </h3>);
 }
 
 export default Input;

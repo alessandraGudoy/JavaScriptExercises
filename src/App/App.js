@@ -5,13 +5,12 @@ import Calculator from './Components/Calculator.js';
 class App extends React.Component{
   constructor(props){
     super(props);
-
+      this.state = {value: ""}
   }
 
   render(){
     return (
       <div>
-        <h1> Calculator </h1>
         <Calculator />
       </div>
     );
